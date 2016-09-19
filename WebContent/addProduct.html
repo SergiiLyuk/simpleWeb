@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product list</title>
+<link href="BOOTSTRAP/progect.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	 <script type="text/javascript">
+	var endDiv ="</div>";
+	var divProductName = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductNameId\">";
+	var divProductPrice = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductPriceId\">";
+	var divProductDescription = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductDescriptptionId\">";
+		$(document)
+				.ready(
+						function() {
+							alert('1');
+							$
+									.ajax({
+										type : "GET",
+										url : "ProductServletDAO", // name of file you want to parse
+										dataType : "json",
+										data: {
+                                            d: JSON
+                                                .stringify("All")
+                                        },
+										success : function(result) {
+											var listProduct = result;
+											var s = '';
+
+											alert(listProduct);
+											for (var i = 0; i < listProduct.length; i++) {
+												s  += divProductName + listProduct[i].productName + endDiv
+												+  divProductPrice + listProduct[i].productPrice + endDiv
+												+ divProductDescription + listProduct[i].productDescription + endDiv;
+														
+											}
+											
+
+											document.getElementById('prList').innerHTML = s;
+										},
+
+										error : function(xhr, status,
+												errorThrown) {
+											alert("not correct JSON: " + status
+													+ ". " + errorThrown);
+										}
+
+									});
+
+						},
+						
+						function filerListener(atrValue) {
+							alert('hello');
+						    //alert($(atrValue).attr("name"));
+						}
+				);
+		
+	</script> 
+	
+
+	<h3>Product list:</h3>
+	<!-- <form action="ProductServletDAO" method="post">
+<strong>Product name</strong>:<input type="text" name="productName"><br>
+<strong>Product price</strong>:<input type="text" name="productPrice"><br>
+<input type="submit" value="Add product">
+</form>
+<br>
+<form action="ProductServletDAO" method="get">
+<input type="submit" value="Get products" Id="gp">
+<div id="prList"></div>
+</form> -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4" style="backgraound-color: yellow;">
+			Колонка пошукового фільтру
+			<div class="col-sm-12"  style="background-color:" id="priseFilterId">
+				<span class=""><strong>Ціна:</strong></span>
+				<div class="col-sm-12"  style="background-color:" id="priseFilterId">
+					<small><a href="#" onclick="(filerListener(this))()" name="price_0_10"><span class="glyphicon glyphicon-plus" >&nbsp;від 0-10</span></a></small>
+				</div>
+				<div class="col-sm-12"  style="background-color:" id="priseFilterId">
+					<small><a href="#"><span class="glyphicon glyphicon-plus">&nbsp;від 11-20</span></a></small>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-8"  style="background-color:green;" >
+			
+				<div class="col-sm-4"  style="background-color:green;" id="poductNameId">Назва продукту</div>
+				<div class="col-sm-4"  style="background-color:green;" id="poductPriceId">Ціна продукту</div>
+				<div class="col-sm-4"  style="background-color:green;" id="poductDescriptptionId">Характеристики</div>
+				<div class="col-sm-4"  style="background-color:green;" id="poductNameId">
+				</div>
+				<div class="col-sm-4"  style="background-color:green;" id="poductPriceId">
+				</div>
+				<div class="col-sm-4"  style="background-color:green;" id="poductDescriptptionId">
+				</div>
+				<div id="prList">
+				<%
+				  ArrayList<PostData> posts=(ArrayList<PostData>) request.getAttribute("posts"); 
+				  for (PostData post: posts) {   
+				%>
+				
+				<div class="col-sm-4"  style="background-color:green;" id="poductNameId">
+				
+				</div>
+				<%}%>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+	var endDiv ="</div>";
+	var divProductName = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductNameId\">";
+	var divProductPrice = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductPriceId\">";
+	var divProductDescription = "<div class=\"col-sm-4\"  style=\"background-color:green;\" id=\"poductDescriptptionId\">";
+	function filerListener(attrVal){
+		var val = $(attrVal).attr("name");
+		alert(val);
+		
+		$.ajax({
+			type : "GET",
+			url : "ProductServletDAO", // name of file you want to parse
+			dataType : "json",
+			data: {
+                d: JSON
+                    .stringify(val)
+            },
+			success : function(result) {
+				alert('SUCCESS!!!');
+				alert(result);
+				
+				var listProdAfterFilter = result;
+				var s1 = '';
+
+				alert(listProdAfterFilter);
+				for (var i = 0; i < listProdAfterFilter.length; i++) {
+					s1  += divProductName + listProdAfterFilter[i].productName + endDiv
+					+  divProductPrice + listProdAfterFilter[i].productPrice + endDiv
+					+ divProductDescription + listProdAfterFilter[i].productDescription + endDiv;
+							
+				}
+				
+
+				document.getElementById('prList').innerHTML = s1;
+			},
+
+			error : function(xhr, status,
+					errorThrown) {
+				alert("not correct JSON: " + status
+						+ ". " + errorThrown);
+			}
+
+		});
+		
+		
+	}
+	
+	</script>
+</body>
+</html>

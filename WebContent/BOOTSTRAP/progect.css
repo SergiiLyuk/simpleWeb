@@ -1,0 +1,116 @@
+.border1px{
+	border: 1px solid black;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+.textDecBig{
+	
+	font-family: Arial, Helvetica, Verdana, sans-serif; 
+	font-size: 100%;
+	font-weight:bold;
+}
+
+.textDecBig150{
+	
+	font-family: Arial, Helvetica, Verdana, sans-serif; 
+	font-size: 150%;
+	font-weight:bold;
+}
+
+.textDecSmall{
+	
+	font-family: Arial, Helvetica, Verdana, sans-serif; 
+	font-size: 90%;
+	font-weight:bold;
+}
+.headerName{
+	
+	height: 100px;
+	background-color: #CEF6F5;
+	font-family: Arial, Helvetica, Sans-Serif;
+}
+
+.vcenter {
+   position: relative;
+     top: 50%;
+}
+
+.product{
+	margin-top: 5px;
+}
+
+.marginTop10{
+	margin-top: 10px;
+}
+
+.marginBottom10{
+	margin-bottom: 10px;
+}
+
+.margin0Padding0{
+	margin: 0px;
+	padding: 0px;
+}
+
+.margin3Padding3{
+	margin: 3px;
+	padding: 3px;
+}
+
+.padding35{
+	padding:35px;
+}
+
+.paddingBottom5{
+	padding-bottom:5px;	
+}
+
+.rowlistZamovlen{
+	line-height: 40px;
+}
+
+
+.rowlistZamovlen div{
+	
+	vertical-align: middle;
+}
+.padding0{
+	padding:0px;
+}
+
+.padding5{
+	padding:5px;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.bootomLine{
+	border-bottom: 1px solid gray;
+}
+
+.BorderMenu{
+	border: 2px solid gray; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+}
+
+form#loginFormId > div{
+	padding: 2px;
+}
+
+button#loginButton{
+	width:100%;
+}
+
+.row-border {
+  border-bottom: 1px solid #ddd;
+  
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="US-ASCII">
+<title>Login Page</title>
+<script src="http://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+
+							var result;
+							var loginingUser;
+
+							$("#login")
+									.on(
+											"click",
+											function() {
+												$(".loginMsg").remove();
+
+												var userLogin = $("#userlogin")
+														.val();
+												var userPwd = $("#userPwd")
+														.val();
+
+												var checkRes = checkLoginFields(
+														userLogin, userPwd);
+
+												if (checkRes == 'SUCCESS') {
+
+													loginingUser = {
+														userLogin : userLogin,
+														userPwd : userPwd
+													};
+
+													//alert(loginingUser.userLogin);
+
+													$
+															.ajax({
+																type : "POST",
+																url : "LoginServlet", // name of file you want to parse
+																dataType : "json",
+																success : function(
+																		result) {
+
+																	var resultContaince = result
+																			.search("home.jsp");
+																	var nextWindowLocationHerf = result;
+
+																	if (resultContaince === 0) {
+																		window.location.href = nextWindowLocationHerf;
+																	} else {
+
+																		$(
+																				'#messageDiv')
+																				.css(
+																						"display",
+																						"block");
+																		var thelink = $(
+																				'<a>Yuo need registration',
+																				{
+																					text : 'registration',
+																					title : 'some title',
+																					href : nextWindowLocationHerf
+																				})
+																				.appendTo(
+																						"#messageDiv");
+																		$(
+																				'#messageDiv')
+																				.$(
+																						'parent_div')
+																				.append(
+																						'<a id="link" href="' + nextWindowLocationHerf + '">Registration</a>');
+
+																	}
+
+																},
+																data : {
+																	d : JSON
+																			.stringify(loginingUser)
+																},
+																error : function(
+																		xhr,
+																		status,
+																		errorThrown) {
+																	alert("not correct JSON: "
+																			+ status
+																			+ ". "
+																			+ errorThrown);
+																}
+
+															});
+
+												}
+											});
+
+							function showMessage(results) {
+
+								if (results == 'FAILURE') {
+									$('#messageDiv').css("display", "block");
+									$("#messageDiv")
+											.append(
+													"<font color='red' class='loginMsg'>Username or password incorrect</font>");
+								}
+							}
+
+							function checkLoginFields(login, password) {
+								var resultCheck;
+
+								if (login === "") {
+									result = 'FAILURE';
+									showMessage(result);
+									return;
+								}
+								if (password === "") {
+									result = 'FAILURE';
+									showMessage(result);
+									return;
+								}
+								resultCheck = 'SUCCESS';
+								return resultCheck;
+							}
+
+						});
+	</script>
+	<h3>Login with email and password</h3>
+	<div id="loginForm">
+		<div class="a">
+			<div class="l">User Email:</div>
+			<div class="r">
+				<input type="text" name="email" id="userlogin">
+			</div>
+		</div>
+		<div class="a">
+			<div class="l">Password:</div>
+			<div class="r">
+				<input type="password" name="password" id="userPwd">
+			</div>
+		</div>
+		<div class="a">
+			<div class="l">&nbsp;</div>
+			<div class="r">
+				<INPUT class="button" type="submit" name="login" id="login"
+					value="Login">
+			</div>
+		</div>
+		<div class="a">
+			<div class="l">&nbsp;</div>
+			<div class="r">
+				<div id="messageDiv" style="display: none;"></div>
+			</div>
+		</div>
+		<!-- <button name="login" id="login">Login</button> -->
+	</div>
+
+	<h2>Table products</h2>
+	
+	<table width="300" border="1" cellpadding="5"
+		style="text-align: center">
+		<tr>
+			<th width="75"><strong>Name</strong></th>
+			<th><span style="font-weight: bold;">Telephone</span></th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr>
+			<td>John</td>
+			<td><a href="tel:0123456785">0123 456 785</a></td>
+			<td><img src="images/check.gif" alt="checked" /></td>
+		</tr>
+		<tr>
+			<td>Cassie</td>
+			<td><a href="tel:9876532432">9876 532 432</a></td>
+			<td><img src="images/check.gif" alt="checked" /></td>
+		</tr>
+	</table>
+
+</body>
+
+</html>

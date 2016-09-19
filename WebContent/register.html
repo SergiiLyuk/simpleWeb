@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="US-ASCII">
+<title>Register Page</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"
+	type="text/javascript"></script>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"
+	type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var registrationUser;
+			$("#RegistrationButton").on("click", function() {
+				 
+				  var userName = $("#name1").val();
+		          var userEmail = $("#emailId").val();
+		          var userCountry = $("#country").val();
+		          var userPwd = $("#pwdId").val();
+		          
+		          
+		          registrationUser = {
+		        		  userName: userName,
+		        		  userEmail: userEmail,
+		        		  userCountry: userCountry,
+		        		  userPwd: userPwd
+		        		  
+		                };
+		         
+		          $.ajax({
+	                    type: "POST",
+	                    url: "RegisterServlet", // name of file you want to parse
+	                    //contentType: "application/json; charset=utf-8",
+	                    dataType: "json",
+	                    success: function(result) {
+	                    	window.location.href = result;
+	                       
+
+	                    },
+	                    data: {
+	                        user: JSON.stringify(registrationUser)
+	                    },
+	                    error: function(xhr, status, errorThrown) {
+	                        alert("not correct JSON: " + status + ". " + errorThrown);
+	                    }
+
+	                });
+				  
+			  });
+			
+
+			/* $.validator.addMethod(
+				    "regex",
+				    function(value, element, regexp) {
+				        var check = false;
+				        return this.optional(element) || regexp.test(value);
+				    },
+				    "Please check your input."
+				); */
+			
+			
+
+			/* $("#registrationForm").validate({
+				rules : {
+					"name" : {
+						
+						required : true,
+						regex: /^[a-zA-Z][a-zA-Z-]+[a-zA-Z]?$/
+						
+					},
+					"email" : {
+						required : true,
+						regex: /[_a-zA-z0-9-\\+]+[@]{1}\.([a-zA-z]{3})/
+					},
+					"country" : {
+						required : true,
+						regex: /^[a-zA-Z][a-zA-Z-]+[a-zA-Z]?$/
+					},
+					"pwd" : {
+						required : true,
+						minlength: 5
+					},
+					"confirm_password" : {
+						required : true,
+						minlength: 5,
+						equalTo: '#pwdId'
+					}
+				},
+				messages : {
+					"name" : {
+						required : "Please, enter a name",
+						regex : "Name not correct"
+						
+					},
+					"email" : {
+						required : "Please, enter a name",
+							regex : "E-mail not correct"
+					},
+					"country" : {
+						required : "Please, enter a name",
+						regex : "Country name not correct"
+					},
+					"pwd" : {
+						required : "Please, enter a password",
+						minlength: "Min length 5 ch"
+						
+					},
+					"confirm_password" : {
+						required : "Please, confirm password",
+						minlength: "Min length 5 ch",
+						 equalTo: 	"Confirm password not eq password"
+					}
+				},
+				
+				
+			}); */
+			
+			 /* $('input').on('keyup', function() {
+			    if ($("#registrationForm").valid()) {
+			        $('#RegistrationButton').prop('disabled', false);  
+			    } else {
+			        $('#RegistrationButton').prop('disabled', 'disabled');
+			    }
+			}); */
+			 
+			 
+			  
+		});
+		
+	</script>
+	<h3>Provide all the fields for registration.</h3>
+	<div id="registrationForm" >
+		
+			<div class="a">
+				<div class="l">Name</div>
+				<div class="r">
+					<INPUT type="text" id="name1" name="name">
+				</div>
+			</div>
+			<div class="a">
+				<div class="l">E-Mail</div>
+				<div class="r">
+					<INPUT type="text" id="emailId" name="email">
+				</div>
+			</div>
+			<div class="a">
+				<div class="l">country</div>
+				<div class="r">
+					<INPUT type="text" id="country" name="country">
+				</div>
+			</div>
+			
+			<div class="a">
+				<div class="l">User password</div>
+				<div class="r">
+					<INPUT type="password" id="pwdId" name="pwd">
+				</div>
+			</div>
+			<div class="a">
+				<div class="l">Confirm password</div>
+				<div class="r">
+					<INPUT type="password" id="confirm_password_Id" name="confirm_password">
+				</div>
+			</div>
+			<div class="a">
+				<div class="l">&nbsp;</div>
+				<div class="r">
+					<INPUT class="button" type="submit" name="submit"
+						id="RegistrationButton" value="Registration">
+				</div>
+			</div>
+		
+	</div>
+	
+</body>
+</html>

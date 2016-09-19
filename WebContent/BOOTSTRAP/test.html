@@ -1,0 +1,52 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+<script  type="text/javascript">
+$(document).ready(function(){
+
+var birthDateStr = '19570615',
+    parts = birthDateStr.match(/(\d{4})(\d{2})(\d{2})/),
+    dateObj = new Date(parts[1], parts[2]-1, parts[3]); // months 0-based!
+	
+getAge(dateObj); 
+
+function getAge(birthDate) {
+  var now = new Date();
+	
+  function isLeap(year) {
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+  }
+
+  // days since the birthdate    
+  var days = Math.floor((now.getTime() - birthDate.getTime())/1000/60/60/24);
+  
+  var age = 0;
+  // iterate the years
+  for (var y = birthDate.getFullYear(); y <= now.getFullYear(); y++){
+    var daysInYear = isLeap(y) ? 366 : 365;
+    if (days >= daysInYear && (days-daysInYear)>= daysInYear){
+      days -= daysInYear;
+      age++;
+      // increment the age only if there are available enough days for the year.
+    }
+	
+	
+  }
+  if(((dateObj.getMonth() + 1) - (now.getMonth() + 1)) == 0 && ((dateObj.getDate()) - (now.getDate())) == 0){
+	age++;
+  }
+  alert('dateObj.getMonth() + 1 -  (now.getMonth() + 1) = '+ ((dateObj.getMonth() + 1) - (now.getMonth() + 1)));
+  alert('dateObj.getDate() -  (now.getDate()) = '+ ((dateObj.getDate()) - (now.getDate())));
+  alert('age = ' + age);
+  return age;
+}
+});
+
+</script>
+</head>
+ <body>
+ <h1>Hello!!!!</h1>
+ </body>
+
+
+</html>

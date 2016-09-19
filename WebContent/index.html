@@ -1,0 +1,308 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Index</title>
+    <link href="BOOTSTRAP/progect.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <!-- <script src="js/app-ajax.js" type="text/javascript"></script> -->
+</head>
+
+<body>
+    <script type="text/javascript">
+    $(document)
+        .ready(
+            function() {
+
+                var result;
+                var loginingUser;
+
+                $("#login").on("click",function() {
+                            $(".loginMsg").remove();
+
+                            var userLogin = $("#userlogin").val();
+                            var userPwd = $("#userPwd").val();
+
+                            var checkRes = checkLoginFields(userLogin, userPwd);
+                            
+                            if (checkRes == 'SUCCESS') {
+
+                                loginingUser = {
+                                    userLogin: userLogin,
+                                    userPwd: userPwd
+                                };
+
+                                alert(loginingUser.userLogin+' '+loginingUser.userPwd);
+
+                                $
+                                    .ajax({
+                                        type: "POST",
+                                        url: "LoginServlet", // name of file you want to parse
+                                        dataType: "json",
+                                        data: {
+                                            d: JSON
+                                                .stringify(loginingUser)
+                                        },
+                                        success: function(result) {
+                                        	alert(result.status);
+
+                                        	if(result.status == 'success'){
+                                        		alert(result.status);
+                                        	}
+                                        	alert('YES');
+                                        	
+                                        	$('#loginForm').replaceWith('<h2>'+ 'Hello ' + loginingUser.userLogin + '!'+'</h2>');
+                                        },
+                                        error: function(
+                                            xhr,
+                                            status,
+                                            errorThrown) {
+                                            alert("not correct JSON: " + status + ". " + errorThrown);
+                                            alert(loginingUser.userLogin+' '+loginingUser.userPwd);
+                                        }
+
+                                    });
+
+                            }
+                        });
+
+                function showMessage(results) {
+
+                    if (results == 'FAILURE') {
+                        $('#messageDiv').css("display", "block");
+                        $("#messageDiv")
+                            .append(
+                                "<font color='red' class='loginMsg'>Username or password incorrect</font>");
+                    }
+                }
+
+                function checkLoginFields(login, password) {
+                    var resultCheck;
+
+                    if (login === "") {
+                        result = 'FAILURE';
+                        showMessage(result);
+                        return;
+                    }
+                    if (password === "") {
+                        result = 'FAILURE';
+                        showMessage(result);
+                        return;
+                    }
+                    resultCheck = 'SUCCESS';
+                    return resultCheck;
+                }
+
+                function removeElemByID(elID){
+
+					
+			 		return $(elID).remove();
+			 		
+	}
+
+            });
+
+	
+    </script>
+    <!-- Start container -->
+    <div class="container">
+        <!-- page header -->
+        <div class="row">
+            <div class="row " style="">
+                <div class="col-sm-12 headerName">
+                    <h1>Ttest E-Shop</h1>
+                </div>
+            </div>
+            <div class="row " style="">
+                <div class="col-sm-12 headerName">
+                    <div class="pull-right " style="margin: 7;" id="testId">
+                        <!-- login form -->
+                        <form role="form" class="form-inline " style="margin: 0; padding: 0;" id="loginForm">
+                            <div class="form-group">
+                                <label for="email">Login</label>
+                                <input type="text" class="form-control" id="userlogin" placeholder="Введите login">
+                            </div>
+                            <div class="form-group">
+                                <label for="pass">Пароль</label>
+                                <input type="password" class="form-control" id="userPwd" placeholder="Пароль">
+                            </div>
+                            <input type="button" class="btn btn-success" id="login" value="Войти"></input>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row " style="">
+                <div class="col-sm-12 " style="margin: 0px; padding: 0px;">
+                    <nav class="navbar navbar-default" role="navigation" style="margin: 0px; padding: 0px">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="index.jsp">Test E-Shop</a>
+                        </div>
+                        <div class="collapse navbar-collapse " style="margin: 0px; padding: 0px;">
+                            <ul class="nav navbar-nav">
+                                <li class=""><a href="index.jsp">Главная</a></li>
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Товари<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Мобільні телефони/смартфони</a></li>
+                                        <li><a href="#">Телевізори</a></li>
+                                        <li><a href="#">ПК/Ноутбуки</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Контакты</a></li>
+                                <li><a href="ShoppingCurt.jsp">Корзина</a></li>
+                                <li><a href="Admin.jsp">Адмінка</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- page body -->
+        <div class="row">
+            <!-- right filters -->
+            <div class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-12" style="">
+                        <form role="form" class="" id="searchPrpduct">
+                            <text class="textDecBig">Тип</text>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">Смартфон</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">Мрбільний телефон</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="">
+                        <form role="form" class="" id="searchPrpduct">
+                            <text class="textDecBig">Виробник</text>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">Apple</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">HTC</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">Samsung</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="">
+                        <form role="form" class="" id="searchPrpduct">
+                            <text class="textDecBig">Діагональ екрану</text>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">5,5"</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">4,6-4,8"</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">4"</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="">
+                        <form role="form" class="" id="searchPrpduct">
+                            <text class="textDecBig">Ціна</text>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">2500-4500 грн</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">4500-6500 грн</label>
+                            </div>
+                            <div class="checkbox">
+                                <label class="textDecSmall">
+                                    <input type="checkbox" value="">4"</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9" style="">
+                <div class="row product" style="">
+                    <form action="">
+                        <div class="col-sm-2" style="">
+                            <a class="" href="#" title="Фото Xiaomi Redmi 3 (Fashion Dark Gray)" data-eventaction="Priceline"> <img class="" alt="Xiaomi Redmi 3 (Fashion Dark Gray)" data-lazy-image="" src="Imgs/689751922.jpg">
+                            </a>
+                        </div>
+                        <div class="col-sm-7" style="">
+                            <div class="">
+                                Смартфон <em>•</em> Nano-SIM + Micro-SIM <em>•</em> 2 (або 1 SIM + карта пам'яті) SIM <em>•</em> екран: 5" <em>•</em> IPS <em>•</em> 1280x720 <em>•</em> вбудована пам'ять: 16 ГБ <em>•</em> оперативна пам'ять: 2 ГБ <em>•</em> процесор: Qualcomm MSM8939v2 Snapdragon 616 <em>•</em> кількість ядер: 8 <em>•</em> камера: 13 МП <em>•</em> ОС: Android 5.1 з фірмовою оболонкою MIUI 7 <em>•</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" style="">
+                            <div class="textDecBig">15000</div>
+                            <div>
+                                <input type="button" class="btn btn-success" value="В корзину"></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row product" style="">
+                    <form action="">
+                        <div class="col-sm-2" style="">
+                            <a class="" href="#" title="Фото Xiaomi Redmi 3 (Fashion Dark Gray)" data-eventaction="Priceline"> <img class="" alt="Xiaomi Redmi 3 (Fashion Dark Gray)" data-lazy-image="" src="Imgs/689751922.jpg">
+                            </a>
+                        </div>
+                        <div class="col-sm-7" style="">
+                            <div class="">
+                                Смартфон <em>•</em> Nano-SIM + Micro-SIM <em>•</em> 2 (або 1 SIM + карта пам'яті) SIM <em>•</em> екран: 5" <em>•</em> IPS <em>•</em> 1280x720 <em>•</em> вбудована пам'ять: 16 ГБ <em>•</em> оперативна пам'ять: 2 ГБ <em>•</em> процесор: Qualcomm MSM8939v2 Snapdragon 616 <em>•</em> кількість ядер: 8 <em>•</em> камера: 13 МП <em>•</em> ОС: Android 5.1 з фірмовою оболонкою MIUI 7 <em>•</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" style="">
+                            <div class="textDecBig">15000</div>
+                            <div>
+                                <input type="button" class="btn btn-success" value="В корзину"></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row product" style="">
+                    <form action="">
+                        <div class="col-sm-2" style="">
+                            <a class="" href="#" title="Фото Xiaomi Redmi 3 (Fashion Dark Gray)" data-eventaction="Priceline"> <img class="" alt="Xiaomi Redmi 3 (Fashion Dark Gray)" data-lazy-image="" src="Imgs/689751922.jpg">
+                            </a>
+                        </div>
+                        <div class="col-sm-7" style="">
+                            <div class="">
+                                Смартфон <em>•</em> Nano-SIM + Micro-SIM <em>•</em> 2 (або 1 SIM + карта пам'яті) SIM <em>•</em> екран: 5" <em>•</em> IPS <em>•</em> 1280x720 <em>•</em> вбудована пам'ять: 16 ГБ <em>•</em> оперативна пам'ять: 2 ГБ <em>•</em> процесор: Qualcomm MSM8939v2 Snapdragon 616 <em>•</em> кількість ядер: 8 <em>•</em> камера: 13 МП <em>•</em> ОС: Android 5.1 з фірмовою оболонкою MIUI 7 <em>•</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" style="">
+                            <div class="textDecBig">15000</div>
+                            <div>
+                                <input type="button" class="btn btn-success" value="В корзину"></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- page footer -->
+        <div class="row">
+            <div class="col-sm-12"></div>
+        </div>
+    </div>
+    <!-- End container -->
+</body>
+
+</html>

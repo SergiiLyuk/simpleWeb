@@ -1,0 +1,35 @@
+/* Left DIV */
+.l
+{
+width: 140px;
+margin: 10px;
+padding: 0px;
+ 
+float: left;
+text-align: right;
+}
+ 
+/* Right DIV */
+.r
+{
+width: 400px;
+margin: 10px;
+padding: 0px;
+ 
+float: left;
+ 
+text-align: left;
+}
+ 
+.a
+{
+clear: both;
+width: 600px;
+padding: 10px;
+}
+
+label.error {
+  margin: 10px;
+  color: #ff0000;
+}
+

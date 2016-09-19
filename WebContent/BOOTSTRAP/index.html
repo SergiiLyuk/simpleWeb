@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/dopstyle.css" rel="stylesheet" media="screen"> 
+	<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+	<script  type="text/javascript">
+$(document).ready(function(){
+
+  $("#dvContent").append("<ul></ul>");
+
+  $.ajax({
+
+    type: "GET",
+
+    url: "../data/BookList.xml",
+
+    dataType: "xml",
+
+    success: function(xml){
+
+    $(xml).find('Book').each(function(){
+
+      var sTitle = $(this).find('Title').text();
+
+      var sPublisher = $(this).find('Publisher').text();
+
+      $("<li></li>").html(sTitle + ", " + sPublisher).appendTo("#dvContent ul");
+
+    });
+
+  },
+
+  error: function() {
+
+    alert("An error occurred while processing XML file.");
+
+  }
+
+  });
+
+});
+
+</script>
+  </head>
+  <body>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12 head-block">
+			<div class="text-header">BS</div >
+		</div>
+        <div class="col-md-12 top-menu">
+			<ul>
+				<li><a href="#">Цены</a></li>
+				<li><a href="#">Услуги</a></li>
+				<li><a href="#">О нас</a></li>
+				<li><a href="#">Контакты</a></li>
+				<li><a href="#">Товары</a></li>
+			</ul>
+			<div class = "log-div">
+				<form role="form" class="form-inline">
+					 <div class="form-group">
+						  <label for="email">Email</label>
+						  <input type="email" class="form-control" id="email" placeholder="Введите email">
+					 </div>
+					 <div class="form-group">
+						  <label for="pass">Пароль</label>
+						  <input type="password" class="form-control" id="pass" placeholder="Пароль">
+					 </div>
+					 <button type="submit" class="btn btn-success">Войти</button>
+				</form>
+				<br/>
+				<div class="reg-hrev-div">
+					<a href="registration.html" >регистрация</a>
+				</div>
+			</div>
+		</div>
+				
+        <div class="col-md-3 top-material">
+			<h3>Шапки для сайта</h3>
+			Если вы не дружите с фотошопом или у вас совсем нет времени на самостоятельное создание шапки, то лучше воспользоваться готовой.<br/>
+		</div>
+		<div class="col-md-6 top-material">
+			<select id="mySelect">
+				<option>loading</option>
+			</select>
+		</div>
+		<div class="col-md-3 top-material">
+			<h3>Шапки для сайта</h3>
+			Если вы не дружите с фотошопом или у вас совсем нет времени на самостоятельное создание шапки, то лучше воспользоваться готовой.<br/>
+		</div>
+		
+        <div class="col-md-3 left-sidebar"></div>
+        <div class="col-md-9 content"></div>
+    </div>
+</div>
+ 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+/*ЦВЕТ И ОТСТУП СНИЗУ ДЛЯ БЛОКОВ*/
+.head-block,.top-menu,.top-material,.left-sidebar,.content{
+	
+    margin-bottom:1px;
+}
+/*ВЫСОТА ШАПКИ*/
+.head-block{
+	text-align:center;
+	color: #FFFAFA;
+	font-size:30px;
+	background:#4682B4;
+    height:150px;
+}
+
+.text-header {
+    position: absolute;
+    top: 30%;
+}
+
+/*ВЫСОТА МЕНЮ*/
+.top-menu{
+    height:60px;
+	
+}
+
+.form-inline{
+  display:inline-block;	
+  position: right;
+}
+.log-div{
+ position:absolute;
+ top:0;
+ right:0;
+}
+
+.reg-hrev-div{
+ position:absolute;
+ top:40px;
+ right:0;
+}
+
+/*ВЫСОТА БЛОКА ВАЖНЫЕ МАТЕРИАЛЫ*/
+.top-material{
+    
+}
+/*ВЫСОТА САЙДБАРА И БЛОКА КОНТЕНТ*/
+.left-sidebar,.content{
+    height:300px;
+}
+/*ГРАНИЦА У КОНТЕНТА*/
+.content{
+    border-left:1px solid #fff;
+}
+
+.top-menu{
+    background:#daf2fe;
+}
+.top-menu ul{
+    padding-left:0;
+    margin-bottom:0;
+}
+.top-menu li{
+    display:inline-block;
+    margin-left:10px;
+    padding:3px 10px;
+}
